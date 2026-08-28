@@ -247,11 +247,18 @@ export default function Today() {
               step="0.1"
               placeholder="57.0"
               value={weightValue}
-              onChange={(e) => setWeightInput(e.target.value)}
+              onChange={(e) => {
+                const raw = e.target.value;
+                setWeightInput(raw);
+                // Enregistre dès qu'une valeur plausible est saisie : sur mobile, l'app peut être
+                // fermée sans que le champ perde le focus, et le poids pilote les paliers.
+                const v = parseFloat(raw.replace(",", "."));
+                if (Number.isFinite(v) && v > 20 && v < 300) setWeight(date, Math.round(v * 10) / 10);
+              }}
               onBlur={() => {
                 if (weightInput === null) return;
                 const v = parseFloat(weightInput.replace(",", "."));
-                setWeight(date, Number.isFinite(v) && v > 20 ? Math.round(v * 10) / 10 : undefined);
+                setWeight(date, Number.isFinite(v) && v > 20 && v < 300 ? Math.round(v * 10) / 10 : undefined);
                 setWeightInput(null);
               }}
               className="w-16 border-b-2 border-petal bg-transparent pb-0.5 font-display text-lg font-bold outline-none focus:border-blossom"
