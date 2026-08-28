@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+
+  /* Palette rose Bloom */
+  --color-blossom: #ec4899;
+  --color-blossom-strong: #be185d;
+  --color-blossom-deep: #9d174d;
+  --color-petal: #fbcfe8;
+  --color-paper: #fdf2f8;
+  --color-ink: #2d2233;
+  --color-ink-soft: #6f6076;
+  --color-ink-faint: #a294a8;
+
+  /* Macros — palette validée CVD */
+  --color-mkcal: #ec4899;
+  --color-mprot: #8b5cf6;
+  --color-mgluc: #f59e0b;
+  --color-mlip: #14b8a6;
+
+  --color-success: #059669;
+  --color-success-soft: #d1fae5;
+
+  --shadow-card: 0 1px 2px rgb(45 34 51 / 0.04), 0 8px 24px -12px rgb(157 23 77 / 0.12);
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overscroll-behavior-y: none;
+}
+
+/* Empêche le zoom auto iOS sur les inputs (< 16px) */
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+.animate-pop {
+  animation: pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-rise {
+  animation: rise 0.28s ease-out both;
+}
+
+@keyframes sheet-in {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+.animate-sheet {
+  animation: sheet-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fade {
+  animation: fade-in 0.2s ease-out both;
+}
+
+.ring-progress {
+  transition: stroke-dashoffset 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
